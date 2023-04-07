@@ -31,8 +31,8 @@ class Word{
         for(let i = 0;  i < this.characters.length; i++){
             str += this.characters[i].letterMatch() + " ";
         }
-        //return str;
-        console.log(str)
+        return str;
+        //console.log(str)
     }
     /*
     wordcompletion(){
@@ -42,7 +42,7 @@ class Word{
 
 export default Word;
 
-//test
+/*test
 
 let dog = new Word("dog");
 dog.getLetter();
@@ -63,3 +63,4 @@ inquirer.prompt({
     dog.renderWord();
 });
 
+*/
