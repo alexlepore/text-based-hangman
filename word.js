@@ -16,7 +16,7 @@ class Word{
         let lettersFound = [];
         for(let i = 0; i < this.characters.length; i++){
             if(guess === this.characters[i].character.toLowerCase()){
-                this.characters[i].appear = true;
+                this.characters[i].match = true;
                 lettersFound.push(guess)            }
         }
         return lettersFound;
@@ -24,8 +24,10 @@ class Word{
     renderWord(){
         let str = "";
         for(let i = 0;  i < this.characters.length; i++){
-            str += this.characters[i].letterMatch();
+            str += this.characters[i].letterMatch() + " ";
         }
+        //return str;
+        console.log(str)
     }
 }
 
@@ -48,5 +50,7 @@ inquirer.prompt({
     console.log(answers.test)
     console.log(typeof answers.test)
     dog.letterMatchCheck(answers.test);
+    console.log(dog.characters)
+    dog.renderWord();
 });
 
