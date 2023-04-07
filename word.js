@@ -19,9 +19,9 @@ class Word{
             if(guess === this.characters[i].character.toLowerCase()){
                 this.characters[i].match = true;
                 lettersFound.push(guess);
-                guessCount += 1            
+                guessCount += 1;            
             } else {
-                guessCount += 1
+                guessCount += 1;
             }
         }
         return lettersFound;

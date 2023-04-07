@@ -21,8 +21,6 @@ let remainingGuesses = 0;
 let currentWord = null;
 let generatedWord = "";
 
-
-
 function initializeVariables(){
     generatedWord = wordsChoices[Math.floor(Math.random() * wordsChoices.length)]
     remainingGuesses = Math.floor(Math.random() * 5) + 5;
@@ -34,23 +32,46 @@ function initializeVariables(){
     console.log(generatedWord);
     console.log(remainingGuesses);
 
-    //promptUser();
-
+    promptUser();
 }
-/*
+
 function promptUser(){
-    co
-}*/
+    if(remainingGuesses > 0){
+        inquirer.prompt({
+            name: "userchoice",
+            message: "Guess a Letter",
+            type: "input"
+        }).then((answers)=>{
+    
+        })
+    } else{
+        inquirer.prompt({
+            name: "userchoice",
+            message: "Would you like to try again",
+            type: "confirm"
+        }).then((answers)=>{
+            if(answers.start === true){
+                startGame();
+            } else{
+                process.exit()
+            }
+        })
+    }
+ 
+}
 
 function startGame(){
     console.log("Welcome to Command Line Hangman");
     inquirer.prompt({
         name: "start",
-        message: "Would you like to play?",
+        message: "Would you like to play",
         type: 'confirm'
     }).then((answers) => {
         if(answers.start === true){
-            console.log("OK")
+            console.log("OK\n")
+            console.log("The rules are simple. I will choose a word from a small list and you will try to guess the word letter for letter \n" + 
+            "A predetermined amount of guesses will be given and if you guess the word before the the limit reaches zero, you win!"
+            )
             initializeVariables();
         }else{
             console.log("bye")
