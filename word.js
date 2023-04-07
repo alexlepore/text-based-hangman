@@ -14,10 +14,15 @@ class Word{
     }
     letterMatchCheck(guess){
         let lettersFound = [];
+        let guessCount = 0;
         for(let i = 0; i < this.characters.length; i++){
             if(guess === this.characters[i].character.toLowerCase()){
                 this.characters[i].match = true;
-                lettersFound.push(guess)            }
+                lettersFound.push(guess);
+                guessCount += 1            
+            } else {
+                guessCount += 1
+            }
         }
         return lettersFound;
     }
@@ -29,6 +34,10 @@ class Word{
         //return str;
         console.log(str)
     }
+    /*
+    wordcompletion(){
+
+    }*/
 }
 
 export default Word;
