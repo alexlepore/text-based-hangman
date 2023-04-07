@@ -1,18 +1,18 @@
 import Letter from "./letter.js";
 import inquirer from "inquirer";
 
-export function Word(word){
-    this.word = word;
-    this.characters = [];
-    this.found = false;
-    //getLetter function process the word and goes through 
-    //each letter in the current word and puts them in an array
-    /*this.getLetters = function(){
-        for(let i =0; i < word.length; i++){
-            this.characters.push(new Letter(word[i]));
+class Word{
+    constructor(word){
+        this.word = word;
+        this.characters = [];
+        this.found = false;
+    }
+    getLetter(){
+        for(let i = 0; i < this.word.length;i++){
+            this.characters.push(new Letter(this.word[i]));
         }
-    };*/
-    this.letterMatchCheck = function(guess){
+    }
+    letterMatchCheck(guess){
         let lettersFound = [];
         for(let i = 0; i < this.characters.length; i++){
             if(guess.toLowerCase() === this.characters[i].toLowerCase()){
@@ -20,22 +20,30 @@ export function Word(word){
                 lettersFound.push(guess)
             }
         }
-        
         return lettersFound;
     }
-
+    renderWord(){
+        let str = "";
+        for(let i = 0;  i < this.characters.length; i++){
+            str += this.characters[i].letterMatch();
+        }
+    }
 }
 
-/*let dog = new Word("dog");
-dog.getLetters();
+export default Word;
+
+//test
+
+let dog = new Word("dog");
+dog.getLetter();
+
 console.log(dog.characters)
-test to see if letter constructors prints an array of letters
-*/
 
 inquirer.prompt({
     name: "test",
-    message: "Take a guess?",
+    message: "test working?",
     type: 'input'
 }).then(function(answers){
     console.log(answers)
-})
+});
+

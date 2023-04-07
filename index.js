@@ -1,5 +1,5 @@
 import inquirer from "inquirer";
-//import Word from "./word.js";
+import Word from "./word.js";
 
 inquirer.prompt({
     name: "test",
