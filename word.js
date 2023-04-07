@@ -15,10 +15,9 @@ class Word{
     letterMatchCheck(guess){
         let lettersFound = [];
         for(let i = 0; i < this.characters.length; i++){
-            if(guess.toLowerCase() === this.characters[i].toLowerCase()){
+            if(guess === this.characters[i].character.toLowerCase()){
                 this.characters[i].appear = true;
-                lettersFound.push(guess)
-            }
+                lettersFound.push(guess)            }
         }
         return lettersFound;
     }
@@ -41,9 +40,13 @@ console.log(dog.characters)
 
 inquirer.prompt({
     name: "test",
-    message: "test working?",
+    message: "guess a letter?",
     type: 'input'
 }).then(function(answers){
-    console.log(answers)
+    //answers is an obbject
+    //answers.test
+    console.log(answers.test)
+    console.log(typeof answers.test)
+    dog.letterMatchCheck(answers.test);
 });
 
