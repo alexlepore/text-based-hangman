@@ -12,7 +12,7 @@ class Word{
             this.characters.push(new Letter(this.word[i]));
         }
     }
-    letterMatchCheck(guess){
+    match(){
         let lettersFound = [];
         let guessCount = 0;
         for(let i = 0; i < this.characters.length; i++){
@@ -42,8 +42,8 @@ class Word{
 
 export default Word;
 
-/*test
-
+//test
+/*
 let dog = new Word("dog");
 dog.getLetter();
 
@@ -51,7 +51,7 @@ console.log(dog.characters)
 
 inquirer.prompt({
     name: "test",
-    message: "guess a letter?",
+    message: "guess a letter",
     type: 'input'
 }).then(function(answers){
     //answers is an obbject
@@ -62,5 +62,4 @@ inquirer.prompt({
     console.log(dog.characters)
     dog.renderWord();
 });
-
 */
