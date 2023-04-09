@@ -11,7 +11,7 @@ class Word{
             this.characters.push(new Letter(this.word[i]));
         }
     }
-    match(guess){
+    letterMatch(guess){
         let lettersFound = [];
         let guessCount = 0;
         for(let i = 0; i < this.characters.length; i++){
@@ -31,12 +31,12 @@ class Word{
             str += this.characters[i].letterMatch() + " ";
         }
         return str;
-        //console.log(str)
     }
-    /*
-    wordcompletion(){
-
-    }*/
+    wordCompletion(){
+        if(this.characters.every((currentLetter) => currentLetter.match === true)){
+            this.found = true;
+        } return this.found;
+    }
 }
 
 export default Word;

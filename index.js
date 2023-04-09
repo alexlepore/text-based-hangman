@@ -29,7 +29,9 @@ function initializeVariables(){
     console.log(currentWord.renderWord() + "\n");
     console.log("Remaining Guesses: " + remainingGuesses + "\n");
 
-    //console.log(currentWord.characters);
+    console.log(currentWord.characters);
+    console.log(currentWord.characters[0].match);
+
     /*console.log(currentWord.renderWord());
     console.log(generatedWord);
     console.log(remainingGuesses);*/
@@ -40,35 +42,43 @@ function initializeVariables(){
 }
 
 function promptUser(){
-    if(remainingGuesses > 1){
-        inquirer.prompt({
-            name: "userchoice",
-            message: "Guess a letter.",
-            type: "input"
-        }).then((answers)=>{
-            //console.log(answers.userchoice)
-            currentWord.match(answers.userchoice);
-            console.log("\n" + currentWord.renderWord() + "\n");
-            remainingGuesses--;
-            console.log("\n" + "Remaining Guesses: " + remainingGuesses + "\n");
-            promptUser();
-        })
+    currentWord.wordCompletion();
+    if(currentWord.found == true){
+        console.log("congrats you won!")
     } else{
-        console.log("You Lost." + "\n");
-        inquirer.prompt({
-            name: "userchoice",
-            message: "Would you like to try again",
-            type: "confirm"
-        }).then((answers)=>{
-            if(answers.userchoice === true){
-                console.log("\n" + "***************************")
-                console.log("\n" + "Good Luck.")
-                initializeVariables();
-            } else{
-                process.exit()
-            }
-        })
+        if(remainingGuesses > 1){
+            inquirer.prompt({
+                name: "userchoice",
+                message: "Guess a letter.",
+                type: "input"
+            }).then((answers)=>{
+                //console.log(answers.userchoice)
+                currentWord.letterMatch(answers.userchoice);
+                console.log("\n" + currentWord.renderWord() + "\n");
+                console.log(currentWord.characters);
+                console.log(currentWord.characters[0].match);
+                remainingGuesses--;
+                console.log("\n" + "Remaining Guesses: " + remainingGuesses + "\n");
+                promptUser();
+            })
+        } else{
+            console.log("You Lost." + "\n");
+            inquirer.prompt({
+                name: "userchoice",
+                message: "Would you like to try again",
+                type: "confirm"
+            }).then((answers)=>{
+                if(answers.userchoice === true){
+                    console.log("\n" + "***************************")
+                    console.log("\n" + "Good Luck.")
+                    initializeVariables();
+                } else{
+                    process.exit()
+                }
+            })
+        }
     }
+    
  
 }
 
