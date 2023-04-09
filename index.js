@@ -23,15 +23,19 @@ let generatedWord = "";
 
 function initializeVariables(){
     generatedWord = wordsChoices[Math.floor(Math.random() * wordsChoices.length)]
-    remainingGuesses = Math.floor(Math.random() * 10) + 5;
+    remainingGuesses = Math.floor(Math.random() * (15 - 10)) + 10;
     currentWord = new Word(generatedWord);
     currentWord.getLetter();
     console.log(currentWord.renderWord() + "\n");
     console.log("Remaining Guesses: " + remainingGuesses + "\n");
-    /*console.log(currentWord.characters);
-    console.log(currentWord.renderWord());
+
+    //console.log(currentWord.characters);
+    /*console.log(currentWord.renderWord());
     console.log(generatedWord);
     console.log(remainingGuesses);*/
+
+    console.log(generatedWord);
+
     promptUser();
 }
 
@@ -43,6 +47,7 @@ function promptUser(){
             type: "input"
         }).then((answers)=>{
             //console.log(answers.userchoice)
+            currentWord.match(answers.userchoice);
             console.log("\n" + currentWord.renderWord() + "\n");
             remainingGuesses--;
             console.log("\n" + "Remaining Guesses: " + remainingGuesses + "\n");
@@ -55,8 +60,10 @@ function promptUser(){
             message: "Would you like to try again",
             type: "confirm"
         }).then((answers)=>{
-            if(answers.start === true){
-                startGame();
+            if(answers.userchoice === true){
+                console.log("\n" + "***************************")
+                console.log("\n" + "Good Luck.")
+                initializeVariables();
             } else{
                 process.exit()
             }
@@ -79,8 +86,7 @@ function startGame(){
             initializeVariables();
         }else{
             console.log("bye")
-        }
-        
+        }      
         console.log(answers.start)
     }).catch((error)=>{
         if(error){

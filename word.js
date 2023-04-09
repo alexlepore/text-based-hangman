@@ -1,6 +1,5 @@
 import Letter from "./letter.js";
 import inquirer from "inquirer";
-
 class Word{
     constructor(word){
         this.word = word;
@@ -12,7 +11,7 @@ class Word{
             this.characters.push(new Letter(this.word[i]));
         }
     }
-    match(){
+    match(guess){
         let lettersFound = [];
         let guessCount = 0;
         for(let i = 0; i < this.characters.length; i++){
