@@ -14,7 +14,7 @@ let wordsChoices = [
     "inheritance"
 ]
 
-/*Both the amount of Guess a user has and the word choice is at random.
+/*Both the amount of guesses a user has and the word choice is at random.
 The amount of remaining guesses is between 10 and 15. */
 
 let remainingGuesses = 0;
@@ -29,14 +29,13 @@ function initializeVariables(){
     console.log(currentWord.renderWord() + "\n");
     console.log("Remaining Guesses: " + remainingGuesses + "\n");
 
+    /* console.log helper test
     console.log(currentWord.characters);
     console.log(currentWord.characters[0].match);
-
-    /*console.log(currentWord.renderWord());
+    console.log(currentWord.renderWord());
     console.log(generatedWord);
-    console.log(remainingGuesses);*/
-
-    console.log(generatedWord);
+    console.log(remainingGuesses);
+    */
 
     promptUser();
 }
@@ -44,7 +43,20 @@ function initializeVariables(){
 function promptUser(){
     currentWord.wordCompletion();
     if(currentWord.found == true){
-        console.log("congrats you won!")
+        console.log("Congrats you won!")
+        inquirer.prompt({
+            name: "userchoice",
+            message: "Would you like to try again",
+            type: "confirm"
+        }).then((answers)=>{
+            if(answers.userchoice === true){
+                console.log("\n" + "***************************")
+                console.log("\n" + "Good Luck.")
+                initializeVariables();
+            } else{
+                process.exit()
+            }
+        })
     } else{
         if(remainingGuesses > 1){
             inquirer.prompt({
@@ -55,8 +67,6 @@ function promptUser(){
                 //console.log(answers.userchoice)
                 currentWord.letterMatch(answers.userchoice);
                 console.log("\n" + currentWord.renderWord() + "\n");
-                console.log(currentWord.characters);
-                console.log(currentWord.characters[0].match);
                 remainingGuesses--;
                 console.log("\n" + "Remaining Guesses: " + remainingGuesses + "\n");
                 promptUser();
@@ -78,8 +88,6 @@ function promptUser(){
             })
         }
     }
-    
- 
 }
 
 function startGame(){
@@ -105,14 +113,5 @@ function startGame(){
     })
 }
 
-/*
-inquirer.prompt({
-    name: "test",
-    message: "test working?",
-    type: 'input'
-}).then(function(answers){
-    console.log(answers)
-});
-*/
 startGame();
 
