@@ -105,7 +105,6 @@ function startGame(){
         }else{
             console.log("bye")
         }      
-        console.log(answers.start)
     }).catch((error)=>{
         if(error){
             console.log(error)
