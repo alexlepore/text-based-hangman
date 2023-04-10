@@ -1,4 +1,5 @@
 import inquirer from "inquirer";
+import chalk from "chalk";
 import Word from "./word.js";
 
 let wordsChoices = [
@@ -27,7 +28,7 @@ function initializeVariables(){
     currentWord = new Word(generatedWord);
     currentWord.getLetter();
     console.log(currentWord.renderWord() + "\n");
-    console.log("Remaining Guesses: " + remainingGuesses + "\n");
+    console.log(chalk.bgRed.white("Remaining Guesses: " + remainingGuesses + "\n"));
 
     /* console.log helper test
     console.log(currentWord.characters);
@@ -43,7 +44,7 @@ function initializeVariables(){
 function promptUser(){
     currentWord.wordCompletion();
     if(currentWord.found == true){
-        console.log("Congrats you won!")
+        console.log(chalk.bold.green("Congrats you won!"))
         inquirer.prompt({
             name: "userchoice",
             message: "Would you like to try again",
@@ -51,7 +52,7 @@ function promptUser(){
         }).then((answers)=>{
             if(answers.userchoice === true){
                 console.log("\n" + "***************************")
-                console.log("\n" + "Good Luck.")
+                console.log(chalk.bgYellow("\n" + "Good Luck."))
                 initializeVariables();
             } else{
                 process.exit()
@@ -68,11 +69,11 @@ function promptUser(){
                 currentWord.letterMatch(answers.userchoice);
                 console.log("\n" + currentWord.renderWord() + "\n");
                 remainingGuesses--;
-                console.log("\n" + "Remaining Guesses: " + remainingGuesses + "\n");
+                console.log(chalk.bgRed.white("\n" + "Remaining Guesses: " + remainingGuesses + "\n"));
                 promptUser();
             })
         } else{
-            console.log("You Lost." + "\n");
+            console.log(chalk.red("You Lost." + "\n"));
             inquirer.prompt({
                 name: "userchoice",
                 message: "Would you like to try again",
@@ -80,7 +81,7 @@ function promptUser(){
             }).then((answers)=>{
                 if(answers.userchoice === true){
                     console.log("\n" + "***************************")
-                    console.log("\n" + "Good Luck.")
+                    console.log(chalk.bgYellow("\n" + "Good Luck."))
                     initializeVariables();
                 } else{
                     process.exit()
@@ -91,7 +92,7 @@ function promptUser(){
 }
 
 function startGame(){
-    console.log("\nWelcome to Command Line Hangman");
+    console.log(chalk.greenBright.bold("\nWelcome to Command Line Hangman"));
     inquirer.prompt({
         name: "start",
         message: "Would you like to play",
@@ -99,8 +100,8 @@ function startGame(){
     }).then((answers) => {
         if(answers.start === true){
             console.log("\nOK\n")
-            console.log("The rules are simple. I will choose a word from a small list and you will try to guess the word letter for letter \n" + 
-            "A predetermined amount of guesses will be given and if you guess the word before the the limit reaches zero, you win!\n")
+            console.log(chalk.italic("The rules are simple. I will choose a word from a small list and you will try to guess the word letter for letter \n" + 
+            "A predetermined amount of guesses will be given and if you guess the word before the the limit reaches zero, you win!\n"));
             initializeVariables();
         }else{
             console.log("bye")

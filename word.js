@@ -1,5 +1,5 @@
 import Letter from "./letter.js";
-import inquirer from "inquirer";
+
 class Word{
     constructor(word){
         this.word = word;
@@ -40,25 +40,3 @@ class Word{
 }
 
 export default Word;
-
-//test
-/*
-let dog = new Word("dog");
-dog.getLetter();
-
-console.log(dog.characters)
-
-inquirer.prompt({
-    name: "test",
-    message: "guess a letter",
-    type: 'input'
-}).then(function(answers){
-    //answers is an obbject
-    //answers.test
-    console.log(answers.test)
-    console.log(typeof answers.test)
-    dog.letterMatchCheck(answers.test);
-    console.log(dog.characters)
-    dog.renderWord();
-});
-*/
